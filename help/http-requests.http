@@ -1,6 +1,9 @@
 ### /config/appName
 GET http://localhost:48791/config/appName
 
+### /config/isTest
+GET http://localhost:48791/config/isTest
+
 ### /config/sysName
 GET http://localhost:48791/config/sysName
 

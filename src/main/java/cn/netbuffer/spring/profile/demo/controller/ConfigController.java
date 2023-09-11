@@ -11,10 +11,17 @@ public class ConfigController {
 
     @Value("${app.name:null}")
     private String appName;
+    @Value("${app.isTest:true}")
+    private Boolean isTest;
     @Value("${sys.name:null}")
     private String sysName;
     @Value("${order.name:null}")
     private String orderName;
+
+    @GetMapping("isTest")
+    public Boolean getIsTest() {
+        return isTest;
+    }
 
     @GetMapping("appName")
     public String getAppName() {
