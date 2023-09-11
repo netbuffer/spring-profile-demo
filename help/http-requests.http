@@ -1,0 +1,8 @@
+### /config/appName
+GET http://localhost:48791/config/appName
+
+### /config/sysName
+GET http://localhost:48791/config/sysName
+
+### /config/orderName
+GET http://localhost:48791/config/orderName
