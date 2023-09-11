@@ -13,7 +13,7 @@ public class ConfigController {
     private String appName;
     @Value("${app.isTest:true}")
     private Boolean isTest;
-    @Value("${sys.name:null}")
+    @Value("${sys.name:sys-name-default}")
     private String sysName;
     @Value("${order.name:null}")
     private String orderName;
