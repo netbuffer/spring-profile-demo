@@ -14,7 +14,7 @@
     <artifactId>spring-profile-demo</artifactId>
     <version>1.0.0</version>
     <name>spring-profile-demo</name>
-    <description>spring-boot-test</description>
+    <description>spring profile test</description>
 
     <properties>
         <java.version>1.8</java.version>
