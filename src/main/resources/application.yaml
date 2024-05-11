@@ -4,7 +4,8 @@ spring:
   profiles:
     active: prod
   config:
-    import: optional:classpath:/module/sys.yaml,optional:classpath:/module/order.yaml
+    import: "optional:classpath:/module/sys.yaml,\
+    optional:classpath:/module/order.yaml"
 
 server:
   port: 48791

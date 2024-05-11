@@ -1,2 +1,7 @@
 order:
   name: order-prod
+  detail: "长文本\
+  内容\
+  换行\
+  配置\
+  但是展示在一行"

@@ -17,6 +17,8 @@ public class ConfigController {
     private String sysName;
     @Value("${order.name:null}")
     private String orderName;
+    @Value("${order.detail:null}")
+    private String orderDetail;
 
     @GetMapping("isTest")
     public Boolean getIsTest() {
@@ -36,6 +38,11 @@ public class ConfigController {
     @GetMapping("orderName")
     public String getOrderName() {
         return orderName;
+    }
+
+    @GetMapping("orderDetail")
+    public String getOrderDetail() {
+        return orderDetail;
     }
 
 }
