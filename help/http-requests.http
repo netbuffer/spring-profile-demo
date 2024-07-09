@@ -12,3 +12,6 @@ GET http://localhost:48791/config/orderName
 
 ### /config/orderDetail
 GET http://localhost:48791/config/orderDetail
+
+### /config/appInfo
+GET http://localhost:48791/config/appInfo

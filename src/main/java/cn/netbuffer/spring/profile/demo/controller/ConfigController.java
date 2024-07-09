@@ -1,5 +1,7 @@
 package cn.netbuffer.spring.profile.demo.controller;
 
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,8 @@ public class ConfigController {
     private String orderName;
     @Value("${order.detail:null}")
     private String orderDetail;
+    @Value("${app.info:null}")
+    private String appInfo;
 
     @GetMapping("isTest")
     public Boolean getIsTest() {
@@ -43,6 +47,11 @@ public class ConfigController {
     @GetMapping("orderDetail")
     public String getOrderDetail() {
         return orderDetail;
+    }
+
+    @GetMapping("appInfo")
+    public JSONObject getAppInfo() {
+        return JSON.parseObject(appInfo);
     }
 
 }

@@ -7,5 +7,12 @@ spring:
     import: "optional:classpath:/module/sys.yaml,\
     optional:classpath:/module/order.yaml"
 
+app:
+  info: |
+    {
+      "name": "spring-profile-demo",
+      "version": "1.0.0"
+    }
+
 server:
   port: 48791
