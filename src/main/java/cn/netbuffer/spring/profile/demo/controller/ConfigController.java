@@ -23,6 +23,8 @@ public class ConfigController {
     private String orderDetail;
     @Value("${app.info:null}")
     private String appInfo;
+    @Value("${ai.model.openai.api-key:null}")
+    private String openAIApiKey;
 
     @GetMapping("isTest")
     public Boolean getIsTest() {
@@ -52,6 +54,11 @@ public class ConfigController {
     @GetMapping("appInfo")
     public JSONObject getAppInfo() {
         return JSON.parseObject(appInfo);
+    }
+
+    @GetMapping("openAIApiKey")
+    public String getOpenAIApiKey() {
+        return openAIApiKey;
     }
 
 }

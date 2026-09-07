@@ -1,0 +1,16 @@
+services:
+  spring-profile-demo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    hostname: spring-profile-demo
+    container_name: spring-profile-demo
+    image: spring-profile-demo:v4.1.1
+    ports:
+      - "48791:8080"
+    restart: "always"
+    environment:
+      TZ: Asia/Shanghai
+      SERVER_PORT: 8080
+      SPRING_PROFILES_ACTIVE: prod
+      JAVA_OPTS: -Dinfo.tags.environment=prod

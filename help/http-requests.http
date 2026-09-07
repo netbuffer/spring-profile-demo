@@ -15,3 +15,6 @@ GET http://localhost:48791/config/orderDetail
 
 ### /config/appInfo
 GET http://localhost:48791/config/appInfo
+
+### /config/openAIApiKey
+GET http://localhost:48791/config/openAIApiKey
