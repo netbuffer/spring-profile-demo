@@ -19,7 +19,7 @@
 
 ### 📥 下载构建产物
 
-前往 [GitHub Releases](../../releases) 页面下载最新的 `spring-profile-demo.jar`。
+前往 [GitHub Releases](https://github.com/netbuffer/spring-profile-demo/releases) 页面下载最新的 `spring-profile-demo.jar`。
 
 ### ▶️ 直接运行
 
