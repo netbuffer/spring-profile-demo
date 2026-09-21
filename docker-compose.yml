@@ -13,4 +13,5 @@ services:
       TZ: Asia/Shanghai
       SERVER_PORT: 8080
       SPRING_PROFILES_ACTIVE: prod
+      APP_DEMO_SERVERPORT: 10086
       JAVA_OPTS: -Dinfo.tags.environment=prod

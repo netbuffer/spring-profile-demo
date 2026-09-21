@@ -2,7 +2,9 @@ package cn.netbuffer.spring.profile.demo.controller;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +27,8 @@ public class ConfigController {
     private String appInfo;
     @Value("${ai.model.openai.api-key:null}")
     private String openAIApiKey;
+    @Resource
+    private Environment environment;
 
     @GetMapping("isTest")
     public Boolean getIsTest() {
@@ -59,6 +63,11 @@ public class ConfigController {
     @GetMapping("openAIApiKey")
     public String getOpenAIApiKey() {
         return openAIApiKey;
+    }
+
+    @GetMapping("getProperty")
+    public String getProperty(String key) {
+        return environment.getProperty(key);
     }
 
 }
