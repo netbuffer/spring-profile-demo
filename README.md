@@ -110,11 +110,42 @@ ai:
 
 当注入 `AI_MODEL_OPENAI_API_KEY` 环境变量时，Spring Boot 会自动匹配并覆盖 `ai.model.openai.api-key`。
 
-### 3. Spring 官方文档参考
+### 3. 典型案例：环境变量优先级“短路”覆盖 YAML 占位符
+
+#### 场景设定
+在 `application.yaml` 中配置了间接占位符：
+```yaml
+ai:
+  enabled: ${SPD_AI_ENABLE:true}
+```
+同时在启动环境（如 IDEA 运行配置或 Docker 环境变量）中设置了：
+```bash
+SPD_AI_ENABLE=true
+AI_ENABLED=false
+```
+
+#### 请求结果与现象
+通过 `/config/getProperty` 接口（底层调用 `Environment.getProperty(key)`）查询：
+| 请求参数 `key` | 返回结果 | 核心解析机制 |
+|:---|:---|:---|
+| `SPD_AI_ENABLE` | `true` | 直接精确匹配到环境变量 `SPD_AI_ENABLE=true` |
+| `AI_ENABLED` | `false` | 直接精确匹配到环境变量 `AI_ENABLED=false` |
+| `ai.enabled` | `false` | **未解析 YAML 占位符，而是直接被 `AI_ENABLED=false` 覆盖** |
+
+![multi-environment-override](help/multi-environment-override.png)
+
+#### 为什么 `ai.enabled` 没有变成 `true`？
+1. **配置源（PropertySource）加载顺序短路**：Spring 在读取属性时按优先级链从高到低依次查找。OS 环境变量（`systemEnvironment`）的优先级远高于 `application.yaml`。
+2. **`SystemEnvironmentPropertySource` 宽松解析机制**：当 Spring 查询 `ai.enabled` 时，底层 `SystemEnvironmentPropertySource` 会将属性名转为大写并替换点号为下划线（即 `AI_ENABLED`），并在系统环境变量中直接命中值 `false`。
+3. **低优先级占位符不被执行**：一旦在高优先级源（环境变量）中成功解析出属性值，Spring 立即返回该值，**不会继续向下读取或解析 `application.yaml`**。因此，YAML 中定义的 `${SPD_AI_ENABLE:true}` 占位符完全被屏蔽短路。
+4. **验证对照**：若从环境中移除 `AI_ENABLED=false`，`ai.enabled` 将退回到 `application.yaml` 进行属性求值，此时才会解析 `${SPD_AI_ENABLE}`，返回结果变为 `true`。
+
+### 4. Spring 官方文档参考
 - **外部化配置加载顺序与优先级**：
   [Spring Boot Reference - Externalized Configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html)
 - **环境变量松散绑定机制（Binding From Environment Variables）**：
   [Spring Boot Reference - Binding From Environment Variables](https://docs.spring.io/spring-boot/reference/features/external-config.html#features.external-config.typesafe-configuration-properties.relaxed-binding.environment-variables)
-- **Spring Framework 核心 Environment 抽象**：
+- **Spring Framework 核心 Environment 抽象与 SystemEnvironmentPropertySource**：
   [Spring Framework Reference - Environment Abstraction](https://docs.spring.io/spring-framework/reference/core/beans/environment.html)
+
 

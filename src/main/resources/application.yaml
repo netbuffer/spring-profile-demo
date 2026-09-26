@@ -18,6 +18,7 @@ app:
     }
 
 ai:
+  enabled: ${SPD_AI_ENABLE:true}
   model:
     openai:
       api-key: xxx

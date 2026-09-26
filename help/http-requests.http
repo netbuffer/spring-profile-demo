@@ -18,3 +18,17 @@ GET http://localhost:48791/config/appInfo
 
 ### /config/openAIApiKey
 GET http://localhost:48791/config/openAIApiKey
+
+### /config/getProperty?key=SPD_AI_ENABLE
+# 返回 true：直接读取系统环境变量 SPD_AI_ENABLE
+GET http://localhost:48791/config/getProperty?key=SPD_AI_ENABLE
+
+### /config/getProperty?key=AI_ENABLED
+# 返回 false：直接读取系统环境变量 AI_ENABLED
+GET http://localhost:48791/config/getProperty?key=AI_ENABLED
+
+### /config/getProperty?key=ai.enabled
+# 返回 false：OS 环境变量优先级高于 application.yaml，SystemEnvironmentPropertySource 将 ai.enabled
+# 宽松匹配到 AI_ENABLED=false 并直接返回，导致 application.yaml 中的 ${SPD_AI_ENABLE:true} 被短路覆盖
+GET http://localhost:48791/config/getProperty?key=ai.enabled
+
